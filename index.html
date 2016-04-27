@@ -1,0 +1,88 @@
+<!doctype html>
+<html  ng-app="app">
+  <head>
+    <title>Hello AngularJS</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  </head>
+ <body  ng-controller="gitHubDataController">
+      <div class="container-fluid">
+      <div class="header clearfix">
+        <nav>
+         
+        </nav>
+        <h3 class="text-muted">Github Repository {{username}}</h3>
+      </div>
+
+      <div class="row">
+           
+      </div>
+
+      <div class="row">  
+        <div class="form-group col-lg-2">
+
+            <label for="">Github User or Org.</label>
+            <input type="text" class="form-control" ng-model="username">
+            <button ng-click="Search()">Search</button>
+  
+
+        </div>
+ <div class="col-lg-10">
+<table class="table">
+      <thead  class="thead-inverse">
+        <tr>
+          <th ng-click="sort('name')">Name<span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th ng-click="sort('description')">Description<span class="glyphicon sort-icon" ng-show="sortKey=='description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th ng-click="sort('homepage')">Homepage<span class="glyphicon sort-icon" ng-show="sortKey=='homepage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th ng-click="sort('created_at')">Created<span class="glyphicon sort-icon" ng-show="sortKey=='created_at'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th ng-click="sort('updated_at')">Last Updated<span class="glyphicon sort-icon" ng-show="sortKey=='updated_at'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+        </tr>
+      </thead>
+      <tbody>
+ 
+         <!-- <tr dir-paginate="repo in repoData|orderBy:predicate:reverse|itemsPerPage:5"> -->
+         <!-- ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize" -->
+       <tr ng-repeat="repo in repoData  | orderBy:sortKey:reverse| startFrom:currentPage*pageSize | limitTo:pageSize" > 
+          <td>{{repo.name}}</td>
+          <td>{{repo.description}}</td>
+          <td>{{repo.homepage}}</td>
+          <td>{{repo.created_at| date : short }}</td>
+          <td>{{repo.updated_at | date : short : timezone}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+ 
+
+ <div>
+    <ul>
+        <li ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize">
+            {{item}}
+        </li>
+    </ul>
+    <div ng-hide="numPages <= 1" >
+      <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+          Previous
+      </button>
+      {{currentPage+1}}/{{numPages}}
+      <button ng-disabled="currentPage >= numPages + -1" ng-click="currentPage=currentPage+1">
+          Next
+      </button>
+  </div>
+</div>
+
+
+ </div>
+        
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2016 Beneus.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
