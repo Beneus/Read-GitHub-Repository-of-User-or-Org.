@@ -9,13 +9,21 @@ var app = angular.module('app', [])
         $scope.urlUserData = urlV3;
         
         $scope.Search=function(){
-            $scope.repos_url = urlV3 + $scope.username + '/repos';
-            $http.get($scope.repos_url + '?per_page=100').success(function (data) {
-             if(data){
-                $scope.repoData = data;
-                $scope.numPages = Math.ceil($scope.repoData.length/$scope.pageSize);
-             }
-            });
+            if($scope.username ){
+                $scope.repos_url = urlV3 + $scope.username + '/repos';
+                $http.get($scope.repos_url + '?per_page=100').success(function (data) {
+                     if(data){
+                        $scope.repoData = data;
+                        $scope.numPages = Math.ceil($scope.repoData.length/$scope.pageSize);
+                     }
+                });
+            }else{
+                $scope.smsError = "There are no Repositories for this User or Org."
+                $scope.repoData = null;
+                $scope.currentPage = 0;
+                $scope.pageSize = 10;
+                $scope.numPages = 0;
+            }
         }
      
         $scope.sort = function(keyname){
