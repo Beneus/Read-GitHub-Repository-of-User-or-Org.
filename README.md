@@ -5,4 +5,3 @@ The results table must be paginated, sortable and filterable by all the options 
 The code must be shared via a Github repository with a README explaining your choices.<br/>
 For the purpose of this test you MUST use an MV* javascript framework (angularjs, emberjs,etc.).<br/>
 You are also free to choose the CSS framework you prefer.<br/>
-Don’t forget to write automated tests.<br/>
